@@ -13,3 +13,43 @@
  *= require_tree .
  *= require_self
  */
+
+ .form-container {
+  width: 100%;
+  max-width: 500px; /* Maksymalna szerokość formularza */
+  padding: 20px;
+  background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
+  border-radius: 10px; /* Opcjonalnie, zaokrąglone rogi */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcjonalnie, cień wokół formularza */
+}
+
+.center-container h1 {
+  margin-bottom: 5px; /* Odstęp między nagłówkiem a formularzem */
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Wyśrodkowuje w pionie */
+  align-items: center;     /* Wyśrodkowuje w poziomie */
+  height: 12vh;           /* Ustawia wysokość kontenera na 100% wysokości widoku */
+  background-color: #f8f9fa; /* Opcjonalne tło strony */
+}
+
+.post-container {
+  background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
+  border-radius: 10px; /* Opcjonalnie, zaokrąglone rogi */
+  padding: 20px;
+  position: relative;
+}
+
+.post-link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  opacity: 0;
+  background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
+}

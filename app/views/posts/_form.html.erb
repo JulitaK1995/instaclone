@@ -1,32 +1,42 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="col-12 col-md-6 col-xl-4" style="margin: auto;">
+<div class="form-container">
 
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+<%= form_with(model: post) do |form| %>
 
   <div>
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class:"form-control" %>
+  <% if post.errors[:title].any? %>
+    <div style="color: red">
+    <%= post.errors.full_messages_for(:title).join(". ") %>
+    </div>
+  <% end %>
   </div>
 
   <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, class:"form-control" %>
+  <% if post.errors[:description].any? %>
+    <div style="color: red">
+    <%= post.errors.full_messages_for(:description).join(". ") %>
+    </div>
+  <% end %>
   </div>
 
   <div>
     <%= form.label :keywords, style: "display: block" %>
-    <%= form.text_field :keywords %>
+    <%= form.text_field :keywords, class:"form-control" %>
+  <% if post.errors[:keywords].any? %>
+    <div style="color: red">
+    <%= post.errors.full_messages_for(:keywords).join(". ") %>
+    </div>
+  <% end %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary col-12" %>
   </div>
 <% end %>
+</div>
+</div>
