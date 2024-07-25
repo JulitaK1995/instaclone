@@ -15,12 +15,13 @@
  */
 
  .form-container {
-  width: 100%;
-  max-width: 500px; /* Maksymalna szerokość formularza */
-  padding: 20px;
-  background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
+  background-color: #94e6e3; /* Opcjonalnie, aby formularz się wyróżniał */
+  border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania dla lepszej widoczności */
   border-radius: 10px; /* Opcjonalnie, zaokrąglone rogi */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcjonalnie, cień wokół formularza */
+  margin-bottom: 20px; /* Odstęp poniżej każdego postu */
+  padding: 20px;
+  position: relative;
+  
 }
 
 .center-container h1 {
@@ -33,13 +34,23 @@
   justify-content: center; /* Wyśrodkowuje w pionie */
   align-items: center;     /* Wyśrodkowuje w poziomie */
   height: 12vh;           /* Ustawia wysokość kontenera na 100% wysokości widoku */
-  background-color: #f8f9fa; /* Opcjonalne tło strony */
+  background-color: #f8fafa; /* Opcjonalne tło strony */
+  border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania dla lepszej widoczności */
+  margin-bottom: 20px; /* Odstęp poniżej każdego postu */
+  position: relative;
 }
 
 .post-container {
-  background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
+  max-width: 500px; /* Maksymalna szerokość formularza */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Wyśrodkowuje w pionie */
+  align-items: center;     /* Wyśrodkowuje w poziomie */
+  background-color: #94e6e3; /* Opcjonalnie, aby formularz się wyróżniał */
+  border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania dla lepszej widoczności */
   border-radius: 10px; /* Opcjonalnie, zaokrąglone rogi */
   padding: 20px;
+  margin-bottom: 20px; /* Odstęp poniżej każdego postu */
   position: relative;
 }
 
@@ -52,4 +63,8 @@
   z-index: 4;
   opacity: 0;
   background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
+}
+
+.center-text {
+  text-align: center; /* Wyśrodkowanie tekstu w kontenerze */
 }
