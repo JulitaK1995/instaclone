@@ -41,7 +41,7 @@
 }
 
 .post-container {
-  max-width: 500px; /* Maksymalna szerokość formularza */
+  /* max-width: 500px; /* Maksymalna szerokość formularza */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Wyśrodkowuje w pionie */
