@@ -45,6 +45,7 @@
 
     <% if user_signed_in? %>
       <div class="navbar-button-container">
+        <%= button_to "Edit account", edit_user_registration_path, class: "navbar-btn btn-primary", method: :get %>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar-btn btn-primary" %>
       </div>
     <% else %>
