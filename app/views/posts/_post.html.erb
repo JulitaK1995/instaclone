@@ -13,6 +13,12 @@
     <%= post.keywords %>
   </p>
 
+  <% if post.files.attached? %>
+    <% post.files.each do |file| %>
+      <%= image_tag(file, style: "object_file: cover; width: 200px; height: 300px;") %>
+    <% end %>
+  <% end %>
+
   <p>
     <%= link_to " ", post, class: "post-link" %>
   </p>
