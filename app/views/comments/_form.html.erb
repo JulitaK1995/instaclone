@@ -1,0 +1,23 @@
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+
+</br>
+  <div>
+    <%= form.text_area :text, placeholder: 'Write your comment here...', rows: 4 %>
+    <% if @comment.errors[:text].any? %>
+      <div style="color: red">
+        <%= @comment.errors.full_messages_for(:text).join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id %>
+    <%= form.hidden_field :post_id %>
+  </div>
+
+
+  <div>
+    <%= form.submit class:"btn btn-primary col-2" %>
+  </div>
+
+<% end %>

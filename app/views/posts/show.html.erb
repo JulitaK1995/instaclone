@@ -15,3 +15,18 @@
     </div>
   <% end %>
 <% end %>
+
+
+</br>
+
+<h2> Create comment </h2>
+
+<%= render 'comments/form', post: @post, comment: @comment %>
+
+</br>
+
+<h3>All comments</h3>
+
+<% @post.comments.each do |comment| %>
+  <p><%= comment.text %></p>
+<% end %>
