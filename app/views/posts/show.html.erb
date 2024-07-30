@@ -5,12 +5,13 @@
 
 <%= render @post %>
 
+<p> <%= link_to "Back to posts", posts_path %> </p>
 
 <% if user_signed_in? %>
-  <div>
-    <p> <%= link_to "Back to posts", posts_path %> </p>
-    <p> <%= link_to "Edit this post", edit_post_path(@post) %> </p>
-
-    <p> <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-primary col-2" %> </p>
-  </div>
+  <% if current_user.id == @post.user.id %>
+    <div>
+      <p> <%= link_to "Edit this post", edit_post_path(@post) %> </p>
+      <p> <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-primary col-2" %> </p>
+    </div>
+  <% end %>
 <% end %>
