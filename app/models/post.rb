@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   validates :keywords, presence: true, length: { minimum: 5, maximum: 1000 }
 
   belongs_to :user
+  has_many :comments
   has_many_attached :files
 
   before_create :randomize_id
