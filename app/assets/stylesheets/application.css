@@ -68,3 +68,8 @@
 .center-text {
   text-align: center; /* Wyśrodkowanie tekstu w kontenerze */
 }
+
+.centered-text {
+  text-align: center;
+  margin-top: 40px;
+}
