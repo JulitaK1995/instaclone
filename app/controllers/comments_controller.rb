@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = @post.comments.find(params[:id])
   end
 
   def authorize_user!
