@@ -1,9 +1,15 @@
 <div class="center-container">
-<h1>My profile</h1>
+  <h1> My profile </h1>
 </div>
 
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar, style: "width: 50px; height: 50px;" %>
+<% end %>
 
-<h2> About me: </h2>
-<p> <h6> <strong> Username: </strong> <%= @user.username %> </h6> </p>
-<p> <h6> <strong> Bio: </strong> <%= @user.bio %> </h6> </p>
-<p> <h6> <strong> Email: </strong> <%= @user.email %> </h6> </p>
+<h2>About me:</h2>
+
+<ul>
+  <li><strong>Username:</strong> <%= @user.username %></li>
+  <li><strong>Bio:</strong> <%= @user.bio %></li>
+  <li><strong>Email:</strong> <%= @user.email %></li>
+</ul>
