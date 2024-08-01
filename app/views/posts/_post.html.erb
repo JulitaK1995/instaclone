@@ -14,7 +14,11 @@
   </p>
 
   <p>
+  <% if post.user %>
     <%= post.user.email %>
+  <% else %>
+    No user assigned
+  <% end %>
   </p>
 
   <% if post.files.attached? %>
@@ -26,6 +30,7 @@
   <p>
     <%= link_to " ", post, class: "post-link" %>
   </p>
+
 </div>
 
 </div>

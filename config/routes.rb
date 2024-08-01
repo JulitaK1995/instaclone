@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {registrations: 'users/registrations'}
 
   get 'posts/myposts'
 
   resources :posts do
     resources :comments, only: [:create, :destroy]
   end
+  
+  resources :users, only: [:show]
   
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

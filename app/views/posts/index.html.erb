@@ -4,6 +4,7 @@
 
 <div id="posts">
   <% @posts.each do |post| %>
+    <% next unless post.user %>
     <%= render post %>
   <% end %>
 </div>
