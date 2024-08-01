@@ -5,6 +5,10 @@
 
 <%= render @post %>
 
+<p> <h6> <strong> User: </strong> <%= @post.user.email %> </h6> </p>
+<p> <%= button_to "View user profile", @post.user, class: "navbar-btn btn-primary", method: :get %>
+
+</br>
 <p> <%= link_to "Back to posts", posts_path %> </p>
 
 <% if user_signed_in? %>
