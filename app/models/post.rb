@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments
   has_many_attached :files
+  has_many :likes
 
   before_create :randomize_id
 
