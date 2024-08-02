@@ -5,6 +5,19 @@
 
 <%= render @post %>
 
+<div class="text-center">
+<% if user_signed_in? %>
+  <% like = current_user.likes.find_by(post: @post) %>
+  <% if like.nil? %>
+    <%= button_to "Like", post_likes_path(@post), params: { like: { post_id: @post.id}}, method: :post, class:"btn btn-primary col-2" %>
+  <% else %>
+    <%= button_to "Unlike", post_like_path(@post, like), method: :delete, class:"btn btn-primary col-2" %>
+  <% end %>
+<% end %>
+
+<p> <%= @post.likes.count %> Likes </p>
+</div>
+
 <p> <h6> <strong> User: </strong> <%= @post.user.email %> </h6> </p>
 <p> <%= button_to "View user profile", user_path(@post.user), class: "navbar-btn btn-primary", method: :get %>
 
