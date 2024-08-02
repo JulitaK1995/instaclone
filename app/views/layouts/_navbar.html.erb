@@ -50,9 +50,6 @@
 
     <% if user_signed_in? %>
       <div class="navbar-button-container">
-        <% if current_user && current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar, style: "width: 35px; height: 35px;" %>
-        <% end %>
         <%= button_to "My profile", current_user, class: "navbar-btn btn-primary", method: :get %>
         <%= button_to "Edit account", edit_user_registration_path, class: "navbar-btn btn-primary", method: :get %>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar-btn btn-primary" %>

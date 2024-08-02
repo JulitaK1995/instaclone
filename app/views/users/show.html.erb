@@ -3,10 +3,11 @@
 </div>
 
 <% if @user.avatar.attached? %>
-  <%= image_tag @user.avatar, style: "width: 50px; height: 50px;" %>
+  <%= image_tag @user.avatar, style: "width: 60px; height: 60px;" %>
 <% end %>
 
-<h2>About me:</h2>
+
+<h2> About me: </h2>
 
 <ul>
   <li><strong>Username:</strong> <%= @user.username %></li>
