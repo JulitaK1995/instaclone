@@ -14,3 +14,62 @@
   <li><strong>Bio:</strong> <%= @user.bio %></li>
   <li><strong>Email:</strong> <%= @user.email %></li>
 </ul>
+
+
+<% if @user != current_user %>
+  <% if current_user.following?(@user) %>
+    <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id),
+                  url: user_relationship_path(@user, current_user.active_relationships.find_by(followed_id: @user.id)),
+                  method: :delete, local: true) do |f| %>
+      <%= f.submit "Unfollow", class: "btn btn-danger" %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: current_user.active_relationships.build(followed_id: @user.id),
+                  url: user_relationships_path(@user), local: true) do |f| %>
+      <%= f.hidden_field :followed_id %>
+      <%= f.submit "Follow", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+</br>
+
+
+<% if @user == current_user %>
+  <h2> Users I Follow: </h2>
+  <ul>
+    <% @following_users.each do |user| %>
+      <li>
+        <%= link_to user.username, user_path(user) %> 
+      </li>
+    <% end %>
+  </ul>
+
+  </br>
+  <h2> Users Following Me: </h2>
+  <ul>
+    <% @followers.each do |user| %>
+      <li>
+        <%= link_to user.username, user_path(user) %> 
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h2> Users Follows: </h2>
+  <ul>
+    <% @following_users.each do |user| %>
+      <li>
+        <%= link_to user.username, user_path(user) %> 
+      </li>
+    <% end %>
+  </ul>
+
+  <h2> Users Following: </h2>
+  <ul>
+    <% @followers.each do |user| %>
+      <li>
+        <%= link_to user.username, user_path(user) %> 
+      </li>
+    <% end %>
+  </ul>
+<% end %>
