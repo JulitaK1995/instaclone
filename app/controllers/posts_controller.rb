@@ -4,7 +4,12 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.order(created_at: :desc)
+    if user_signed_in?
+      followed_user_ids = current_user.following.pluck(:id) << current_user.id
+      @posts = Post.where(user_id: followed_user_ids).order(created_at: :desc)
+    else
+      @posts = Post.none
+    end
   end
 
   # GET /posts/1 or /posts/1.json

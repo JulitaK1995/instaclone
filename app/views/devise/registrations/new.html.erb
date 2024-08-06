@@ -5,21 +5,35 @@
 <div class="col-12 col-md-6 col-xl-4" style="margin: auto;">
 <div class="form-container">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+    <% if resource.errors[:email].any? %>
+    <div style="color: red">
+      <%= resource.errors.full_messages_for(:email).join(". ") %>
+    </div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :bio %><br />
     <%= f.text_field :bio, class:"form-control" %>
+    <% if resource.errors[:bio].any? %>
+    <div style="color: red">
+      <%= resource.errors.full_messages_for(:bio).join(". ") %>
+    </div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, class:"form-control" %>
+    <% if resource.errors[:username].any? %>
+    <div style="color: red">
+      <%= resource.errors.full_messages_for(:username).join(". ") %>
+    </div>
+    <% end %>
   </div>
 
   <div class="field">
@@ -33,11 +47,21 @@
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+    <% if resource.errors[:password].any? %>
+    <div style="color: red">
+      <%= resource.errors.full_messages_for(:password).join(". ") %>
+    </div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+    <% if resource.errors[:password_confirmation].any? %>
+    <div style="color: red">
+      <%= resource.errors.full_messages_for(:password_confirmation).join(". ") %>
+    </div>
+    <% end %>
   </div>
 
   <div class="actions">

@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+         validates :username, presence: true, uniqueness: { case_sensitive: false }
          
          has_many :active_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
          has_many :passive_relationships, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
