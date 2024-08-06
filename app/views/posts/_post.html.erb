@@ -31,6 +31,8 @@
     <%= link_to " ", post, class: "post-link" %>
   </p>
 
+  <%= post.created_at.in_time_zone('Europe/Warsaw').strftime("%H:%M, %d-%m-%Y") %>
+
 </div>
 
 </div>
