@@ -1,5 +1,5 @@
 <div class="center-container">
-  <h1> My profile </h1>
+  <h1> User profile </h1>
 </div>
 
 <% if @user.avatar.attached? %>
@@ -73,3 +73,12 @@
     <% end %>
   </ul>
 <% end %>
+
+  <h2> User posts: </h2>
+    <% if @posts.present? %>
+      <%= render @posts %>
+    <% else %>
+      <p> No posts available. </p>
+    <% end %>
+
+
