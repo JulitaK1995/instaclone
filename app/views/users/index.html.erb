@@ -3,9 +3,27 @@
 <% if @users.any? %>
   <ul>
     <% @users.each do |user| %>
-      <li> <%= link_to user.username, user_path(user) %> </li>
+      <li id="user-<%= user.id %>">
+        <%= link_to user.username, user_path(user) %>
+
+        <% if user != current_user %>
+          <% if current_user.following?(user) %>
+            <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
+                          url: user_relationship_path(user, current_user.active_relationships.find_by(followed_id: user.id)),
+                          method: :delete, remote: true) do |f| %>
+              <%= f.submit "Unfollow", class: "btn btn-danger" %>
+            <% end %>
+          <% else %>
+            <%= form_with(model: current_user.active_relationships.build(followed_id: user.id),
+                          url: user_relationships_path(user), remote: true) do |f| %>
+              <%= f.hidden_field :followed_id %>
+              <%= f.submit "Follow", class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
-  <p> No users found. </p>
+  <p>No users found.</p>
 <% end %>

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def search
     @query = params[:query]
     if @query.present?
-      @users = User.where("username LIKE ?", "%#{@query}%")
+      @users = User.where("username LIKE ?", "%#{@query}%").where.not(id: current_user.id)
     else
       @users = User.none
     end

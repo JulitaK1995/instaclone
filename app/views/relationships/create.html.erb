@@ -1,2 +1,3 @@
-<h1>Relationships#create</h1>
-<p>Find me in app/views/relationships/create.html.erb</p>
+<% if @user %>
+  $("#user-<%= @user.id %>").html('<%= j render partial: "users/follow_form", locals: { user: @user } %>');
+<% end %>
