@@ -2,9 +2,13 @@
   <h1> User profile </h1>
 </div>
 
-<% if @user.avatar.attached? %>
-  <%= image_tag @user.avatar, style: "width: 60px; height: 60px;" %>
-<% end %>
+<div class="avatar-container">
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, class: "avatar-image" %>
+  <% end %>
+</div>
+
+</br>
 
 <% if @user != current_user %>
   <% if current_user.following?(@user) %>

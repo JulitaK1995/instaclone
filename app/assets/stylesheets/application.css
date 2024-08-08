@@ -94,3 +94,18 @@
 .profile-column li {
   margin-bottom: 5px;
 }
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  height: auto;
+  padding-top: 20px; 
+}
+
+.avatar-image {
+  width: 150px; 
+  height: 150px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
