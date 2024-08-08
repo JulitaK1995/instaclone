@@ -6,16 +6,6 @@
   <%= image_tag @user.avatar, style: "width: 60px; height: 60px;" %>
 <% end %>
 
-
-<h2> About me: </h2>
-
-<ul>
-  <li><strong>Username:</strong> <%= @user.username %></li>
-  <li><strong>Bio:</strong> <%= @user.bio %></li>
-  <li><strong>Email:</strong> <%= @user.email %></li>
-</ul>
-
-
 <% if @user != current_user %>
   <% if current_user.following?(@user) %>
     <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id),
@@ -32,53 +22,39 @@
   <% end %>
 <% end %>
 
-</br>
 
+<div class="profile-info">
+  <div class="profile-column">
+    <h2> About me:</h2>
+    <ul>
+      <li> <strong> Username:</strong> <%= @user.username %> </li>
+      <li> <strong> Bio:</strong> <%= @user.bio %> </li>
+      <li> <strong> Email:</strong> <%= @user.email %> </li>
+    </ul>
+  </div>
+  <div class="profile-column">
+    <h2> <%= @following_users.count %> Following </h2>
+    <ul>
+      <% @following_users.each do |user| %>
+        <li> <%= link_to user.username, user_path(user) %> </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="profile-column">
+    <h2> <%= @followers.count %> Followers </h2>
+    <ul>
+      <% @followers.each do |user| %>
+        <li> <%= link_to user.username, user_path(user) %> </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<% if @user == current_user %>
-  <h2> Users I Follow: </h2>
-  <ul>
-    <% @following_users.each do |user| %>
-      <li>
-        <%= link_to user.username, user_path(user) %> 
-      </li>
-    <% end %>
-  </ul>
-
-  </br>
-  <h2> Users Following Me: </h2>
-  <ul>
-    <% @followers.each do |user| %>
-      <li>
-        <%= link_to user.username, user_path(user) %> 
-      </li>
-    <% end %>
-  </ul>
+<h2> Posts:</h2>
+<% if @posts.present? %>
+  <%= render @posts %>
 <% else %>
-  <h2> Users Follows: </h2>
-  <ul>
-    <% @following_users.each do |user| %>
-      <li>
-        <%= link_to user.username, user_path(user) %> 
-      </li>
-    <% end %>
-  </ul>
-
-  <h2> Users Following: </h2>
-  <ul>
-    <% @followers.each do |user| %>
-      <li>
-        <%= link_to user.username, user_path(user) %> 
-      </li>
-    <% end %>
-  </ul>
+  <p> No posts available. </p>
 <% end %>
-
-  <h2> User posts: </h2>
-    <% if @posts.present? %>
-      <%= render @posts %>
-    <% else %>
-      <p> No posts available. </p>
-    <% end %>
 
 

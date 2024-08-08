@@ -73,3 +73,24 @@
   text-align: center;
   margin-top: 40px;
 }
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.profile-column {
+  flex: 1;
+  min-width: 30%;
+  margin: 10px;
+}
+
+.profile-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-column li {
+  margin-bottom: 5px;
+}
