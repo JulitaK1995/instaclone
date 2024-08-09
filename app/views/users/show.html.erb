@@ -4,8 +4,15 @@
 
 <div class="avatar-container">
   <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, class: "avatar-image" %>
+    <%= image_tag @user.avatar, class: "avatar-image", data: { user_id: @user.id } %>
   <% end %>
+</div>
+
+<!-- Modal -->
+<div id="modal-<%= @user.id %>" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modal-img-<%= @user.id %>">
+  <div id="caption-<%= @user.id %>"><%= @user.username %></div>
 </div>
 
 </br>

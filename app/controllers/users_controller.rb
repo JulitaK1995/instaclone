@@ -25,5 +25,13 @@ class UsersController < ApplicationController
       @followers = @user.followers
     end
   end
+
+  def avatar_data
+    user = User.find(params[:id])
+    render json: {
+      image_url: url_for(user.avatar),
+      caption: user.username
+    }
+  end
   
 end

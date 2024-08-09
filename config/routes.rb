@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'posts/myposts'
 
+  get 'users/:id/avatar_data', to: 'users#avatar_data'
+
   resources :posts do
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
