@@ -2,7 +2,13 @@
   <h1> <%= @post.title %> </h1>
 </div>
 
-<p> <h6> <strong> User: </strong> <%= link_to @user.username, user_path(@user) %> </h6> </p>
+  <p>
+    <h6>
+      <strong>User: </strong>
+      <%= link_to @user.username, user_path(@user) %>
+    </h6>
+  </p>
+
 
 <div id="<%= dom_id(@post) %>" class="post-container">
   <div class="center-text">
