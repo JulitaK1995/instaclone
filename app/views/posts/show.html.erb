@@ -11,6 +11,7 @@
         <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
       <% end %>
     <% end %>
+  </div>
 
     <p>
       <%= @post.description %>
