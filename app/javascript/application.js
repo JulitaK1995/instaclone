@@ -20,18 +20,29 @@ document.addEventListener("turbo:load", function() {
           modal.style.display = "block";
           modalImg.src = data.image_url;
           captionText.innerHTML = data.caption;
+
+          // Dodaj nasłuchiwanie na klawisz Escape tylko raz po otwarciu modalu
+          const escapeListener = function(event) {
+            if (event.key === "Escape") {
+              modal.style.display = "none";
+              document.removeEventListener("keydown", escapeListener);
+            }
+          };
+          document.addEventListener("keydown", escapeListener);
         });
 
-      // Zamknięcie modalu
+      // Zamknięcie modalu po kliknięciu przycisku "close"
       var span = modal.querySelector(".close");
       span.addEventListener("click", function() {
         modal.style.display = "none";
+        document.removeEventListener("keydown", escapeListener);
       });
 
       // Zamknięcie modalu po kliknięciu w dowolne miejsce poza obrazkiem
       modal.addEventListener("click", function(event) {
         if (event.target === modal) {
           modal.style.display = "none";
+          document.removeEventListener("keydown", escapeListener);
         }
       });
     });
