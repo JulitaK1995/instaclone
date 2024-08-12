@@ -1,12 +1,11 @@
 class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 5, maximum: 100 }
   validates :description, presence: true, length: { minimum: 5, maximum: 1000 }
-  validates :keywords, presence: true, length: { minimum: 5, maximum: 1000 }
 
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many_attached :files
-  has_many :likes
+  has_many :likes, dependent: :destroy
 
   before_create :randomize_id
 

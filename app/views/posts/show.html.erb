@@ -2,8 +2,29 @@
   <h1> <%= @post.title %> </h1>
 </div>
 
+<p> <h6> <strong> User: </strong> <%= link_to @user.username, user_path(@user) %> </h6> </p>
 
-<%= render @post %>
+<div id="<%= dom_id(@post) %>" class="post-container">
+  <div class="center-text">
+    <% if @post.files.attached? %>
+      <% @post.files.each do |file| %>
+        <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
+      <% end %>
+    <% end %>
+
+    <p>
+      <%= @post.description %>
+    </p>
+
+    <%= @post.created_at.in_time_zone('Europe/Warsaw').strftime("%H:%M, %d-%m-%Y") %>
+
+    <!-- Modal -->
+    <div id="image-modal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modal-image">
+    </div>
+</div>
+
 
 <div class="text-center">
   <% if user_signed_in? %>
@@ -21,9 +42,6 @@
 
 <p> <%= @post.likes.count %> Likes </p>
 </div>
-
-<p> <h6> <strong> User: </strong> <%= @post.user.email %> </h6> </p>
-<p> <%= button_to "View user profile", user_path(@post.user), class: "navbar-btn btn-primary", method: :get %>
 
 </br>
 <p> <%= link_to "Back to posts", posts_path %> </p>

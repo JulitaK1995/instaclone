@@ -114,22 +114,40 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000; /* Wysoki z-index, aby modal był na wierzchu */
+  z-index: 1000;
   padding-top: 50px;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  width: 80%;
+  height: 80%;
+  overflow: hidden; /* Ukrywa wszelkie nadmiarowe elementy */
   background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Modal content */
 .modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
+  max-width: 100vw; /* Wypełnia szerokość widoku */
+  max-height: 80vh; /* Wypełnia wysokość widoku */
+  object-fit: contain; /* Utrzymuje proporcje obrazka, skalując go */
+  cursor: grab;
+}
+
+/* Dodanie animacji */
+.modal-content {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 /* Styl zamknięcia modalu */
@@ -148,19 +166,4 @@
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
-}
-
-/* Dodanie animacji */
-.modal-content {
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@keyframes zoom {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
 }

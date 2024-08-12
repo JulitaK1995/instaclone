@@ -1,31 +1,16 @@
 <div id="<%= dom_id(post) %>", class="post-container">
 
 <div class="center-text">
-  <p>
-    <%= post.title %>
-  </p>
-
-  <p>
-    <%= post.description %>
-  </p>
-
-  <p>
-    <%= post.keywords %>
-  </p>
-
-  <p>
-  <% if post.user %>
-    <%= post.user.email %>
-  <% else %>
-    No user assigned
-  <% end %>
-  </p>
 
   <% if post.files.attached? %>
     <% post.files.each do |file| %>
       <%= image_tag(file, style: "object_file: cover; width: 200px; height: 300px;") %>
     <% end %>
   <% end %>
+
+  <p>
+    <%= post.description %>
+  </p>
 
   <p>
     <%= link_to " ", post, class: "post-link" %>

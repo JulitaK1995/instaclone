@@ -25,16 +25,6 @@
   </div>
 
   <div>
-    <%= form.label :keywords, style: "display: block" %>
-    <%= form.text_field :keywords, class:"form-control" %>
-  <% if post.errors[:keywords].any? %>
-    <div style="color: red">
-    <%= post.errors.full_messages_for(:keywords).join(". ") %>
-    </div>
-  <% end %>
-  </div>
-
-  <div>
     <%= form.label :files %>
     <%= form.file_field :files, multiple: true %>
   </div>
