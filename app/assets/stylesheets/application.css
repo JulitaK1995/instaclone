@@ -13,6 +13,20 @@
  *= require_tree .
  *= require_self
  */
+ 
+ html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
 
  .form-container {
   background-color: #94e6e3; /* Opcjonalnie, aby formularz się wyróżniał */
@@ -167,3 +181,4 @@
   text-decoration: none;
   cursor: pointer;
 }
+
