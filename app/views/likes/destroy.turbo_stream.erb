@@ -1,0 +1,18 @@
+<%= turbo_stream.replace "like-button-#{@post.id}" do %>
+  <% if user_signed_in? %>
+    <% if current_user != @post.user %>
+      <% like = current_user.likes.find_by(post: @post) %>
+      <% if like.nil? %>
+        <%= button_to "Like", post_likes_path(@post), method: :post, class: "btn btn-primary col-2", id: "like-button-#{@post.id}", data: { turbo_frame: "like-button-#{@post.id}" } %>
+      <% else %>
+        <%= button_to "Unlike", post_like_path(@post, like), method: :delete, class: "btn btn-primary col-2", id: "like-button-#{@post.id}", data: { turbo_frame: "like-button-#{@post.id}" } %>
+      <% end %>
+    <% else %>
+      <p>You cannot like your own post.</p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "like-count-#{@post.id}" do %>
+  <p id="like-count-<%= @post.id %>"><%= @post.likes.count %> Likes</p>
+<% end %>

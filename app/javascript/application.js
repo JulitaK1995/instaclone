@@ -60,4 +60,10 @@ document.addEventListener("turbo:load", function() {
       openModal(modal, img.src, "");
     });
   });
+
+
+  document.addEventListener("turbo:frame-load", function(event) {
+    // Możesz dodać dodatkowe logi do debugowania, jeśli potrzebujesz
+    console.log("Turbo Frame loaded:", event.target);
+  });
 });

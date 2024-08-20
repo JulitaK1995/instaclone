@@ -32,22 +32,27 @@
     </div>
 </div>
 
-
 <div class="text-center">
+<%= turbo_frame_tag "like-button-#{@post.id}" do %>
   <% if user_signed_in? %>
     <% if current_user != @post.user %>
       <% like = current_user.likes.find_by(post: @post) %>
       <% if like.nil? %>
-        <%= button_to "Like", post_likes_path(@post), params: { like: { post_id: @post.id } }, method: :post, class: "btn btn-primary col-2" %>
+        <%= form_with(model: @like, url: post_likes_path(@post), method: :post, local: true, html: { data: { turbo_frame: "like-button-#{@post.id}" } }) do |f| %>
+        <%= f.submit "Like", class: "btn btn-primary col-2", id: "like-button-#{@post.id}" %>
+        <% end %>
       <% else %>
-        <%= button_to "Unlike", post_like_path(@post, like), method: :delete, class: "btn btn-primary col-2" %>
+        <%= form_with(model: @like, url: post_like_path(@post, like), method: :delete, local: true, html: { data: { turbo_frame: "like-button-#{@post.id}" } }) do |f| %>
+        <%= f.submit "Unlike", class: "btn btn-primary col-2", id: "like-button-#{@post.id}" %>
+        <% end %>
       <% end %>
     <% else %>
-      <p> You cannot like your own post. </p>
+      <p>You cannot like your own post.</p>
     <% end %>
   <% end %>
+<% end %>
 
-<p> <%= @post.likes.count %> Likes </p>
+<p id="like-count-<%= @post.id %>"><%= @post.likes.count %> Likes</p>
 </div>
 
 </br>
