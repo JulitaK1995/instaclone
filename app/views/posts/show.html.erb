@@ -13,8 +13,11 @@
 <div id="<%= dom_id(@post) %>" class="post-container">
   <div class="center-text">
     <% if @post.files.attached? %>
-      <% @post.files.each do |file| %>
-        <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
+      <% @post.files.each_with_index do |file, index| %>
+        <div class="image-container" style="margin-bottom: 10px;">
+          <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
+          <p>Zdjęcie <%= index + 1 %> z <%= @post.files.count %></p>
+        </div>
       <% end %>
     <% end %>
   </div>
