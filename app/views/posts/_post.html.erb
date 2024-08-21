@@ -4,11 +4,7 @@
 
   <% if post.files.attached? %>
     <% post.files.each_with_index do |file, index| %>
-<<<<<<< HEAD
       <div style="margin-bottom: 20px;">
-=======
-      <div class="image-container" style="margin-bottom: 10px;">
->>>>>>> f082dda463333d7768b3a90b4f3672605b640d13
         <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
         <p>Zdjęcie <%= index + 1 %> z <%= post.files.count %></p>
       </div>
