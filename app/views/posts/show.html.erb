@@ -12,28 +12,33 @@
 
 <div id="<%= dom_id(@post) %>" class="post-container">
   <div class="center-text">
-  <% if @post.files.attached? %>
-    <% @post.files.each_with_index do |file, index| %>
-      <div style="margin-bottom: 20px;">
-        <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
-        <p>Zdjęcie <%= index + 1 %> z <%= @post.files.count %></p>
+    <div class="image-carousel">
+      <div class="carousel-container">
+        <p>
+          <%= @post.description %>
+        </p>
+        <% if @post.files.attached? %>
+          <% @post.files.each_with_index do |file, index| %>
+            <%= image_tag url_for(file), class: "carousel-image", data: { index: index }, style: "display: #{'block' if index == 0};" %>
+          <% end %>
+        <% end %>
+        <div class="carousel-counter">
+          <p>Zdjęcie <span id="current-image">1</span> z <%= @post.files.count %></p>
+        </div>
+        <button class="carousel-prev">←</button>
+        <button class="carousel-next">→</button>
       </div>
-    <% end %>
-  <% end %>
+    </div>
   </div>
-
-    <p>
-      <%= @post.description %>
-    </p>
-
-    <%= @post.created_at.in_time_zone('Europe/Warsaw').strftime("%H:%M, %d-%m-%Y") %>
+  </br>
+  <%= @post.created_at.in_time_zone('Europe/Warsaw').strftime("%H:%M, %d-%m-%Y") %>
+</div>
 
     <!-- Modal -->
     <div id="image-modal" class="modal">
       <span class="close">&times;</span>
       <img class="modal-content" id="modal-image">
     </div>
-</div>
 
 <div class="text-center">
 <%= turbo_frame_tag "like-button-#{@post.id}" do %>
