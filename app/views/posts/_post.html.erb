@@ -1,27 +1,26 @@
-<div id="<%= dom_id(post) %>", class="post-container">
-
-<div class="center-text">
-
-  <% if post.files.attached? %>
-    <% post.files.each_with_index do |file, index| %>
-      <div style="margin-bottom: 20px;">
-        <%= image_tag(file, style: "object-fit: cover; width: 200px; height: 300px;", class: "post-image", data: { file_url: url_for(file) }) %>
-        <p>Zdjęcie <%= index + 1 %> z <%= post.files.count %></p>
+<div id="<%= dom_id(post) %>" class="post-container">
+  <div class="center-text">
+    <div class="image-carousel">
+      <div class="carousel-container">
+        <p>
+          <%= post.description %>
+        </p>
+        <% if post.files.attached? %>
+          <% post.files.each_with_index do |file, index| %>
+            <%= image_tag url_for(file), class: "carousel-image", data: { index: index }, style: "display: #{'block' if index == 0};" %>
+          <% end %>
+        <% end %>
+        <div class="carousel-counter">
+          <p>Zdjęcie <span id="current-image">1</span> z <%= post.files.count %></p>
+        </div>
       </div>
-    <% end %>
-  <% end %>
-
-  <p>
-    <%= post.description %>
-  </p>
-
-  <p>
-    <%= link_to " ", post, class: "post-link" %>
-  </p>
-
+    </div>
+  </div>
+  <br>
   <%= post.created_at.in_time_zone('Europe/Warsaw').strftime("%H:%M, %d-%m-%Y") %>
-
-</div>
+  <p>
+  <%= link_to " ", post, class: "post-link" %>
+  </p>
 
 </div>
 
