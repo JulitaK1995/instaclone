@@ -86,14 +86,59 @@
 
 <p> <h3>All comments</h3> </p>
 
-<% @post.comments.each do |comment| %>
-  <% if comment.user.present? %>
-    <p><strong><%= link_to comment.user.username, user_path(comment.user) %>:</strong> <%= comment.text %></p>
-  <% end %>
+<% @post.comments.where(parent_comment_id: nil).each do |comment| %>
+  <div class="comment">
+    <!-- Główny komentarz -->
+    <p>
+      <strong><%= link_to comment.user.username, user_path(comment.user) %></strong>
+      <%= comment.text %>
+    </p>
 
-  <% if comment.user == current_user %>
-    <% if comment.id.present? %>
-      <%= button_to "Delete", post_comment_path(@post, comment), method: :delete %>
+    <!-- Przycisk "Add a reply" -->
+    <button type="button" class="btn btn-danger btn-sm reply-toggle" data-comment-id="<%= comment.id %>">
+      Add a reply
+    </button>
+
+    <!-- Formularz odpowiedzi na główny komentarz (domyślnie ukryty) -->
+    <div class="reply-form-container" id="reply-form-<%= comment.id %>" style="display: none; margin-left: 15px; margin-top: 5px;">
+      <%= form_with(model: [comment.post, Comment.new], local: true, html: { class: "reply-form" }) do |f| %>
+        <%= f.hidden_field :parent_comment_id, value: comment.id %>
+        <%= f.text_area :text, placeholder: "Add a reply...", rows: 1, class: "reply-input" %>
+        <%= f.submit "Post", class: "btn btn-success btn-sm" %>
+      <% end %>
+    </div>
+
+    <!-- Wyświetlanie odpowiedzi na główny komentarz -->
+    <div class="replies" style="margin-left: 15px;">
+      <% comment.replies.each do |reply| %>
+        <div class="comment">
+          <p>
+            <strong><%= link_to reply.user.username, user_path(reply.user) %></strong>
+            <%= reply.text %>
+          </p>
+
+          <!-- Formularz odpowiedzi na odpowiedź (jeśli jest) -->
+          <div style="margin-left: 15px; margin-top: 5px;">
+            <%= form_with(model: [comment.post, Comment.new], local: true, html: { class: "reply-form" }) do |f| %>
+              <%= f.hidden_field :parent_comment_id, value: reply.id %>
+              <%= f.text_area :text, placeholder: "Add a reply...", rows: 1, class: "reply-input" %>
+              <%= f.submit "Post", class: "btn btn-success btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Opcja usunięcia komentarza -->
+    <% if comment.user == current_user %>
+      <% if comment.id.present? %>
+        <div style="margin-top: 5px;">
+          <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
+
+
+
