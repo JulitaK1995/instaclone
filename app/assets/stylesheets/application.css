@@ -182,3 +182,42 @@ footer {
   cursor: pointer;
 }
 
+.comment {
+  margin-bottom: 15px;
+}
+
+.replies {
+  margin-left: 20px;
+}
+
+.reply-form {
+  margin-top: 10px;
+}
+
+.reply-input {
+  width: 300px; /* lub inna wartość, która Ci odpowiada */
+  min-width: 100px; /* opcjonalnie, aby ustawić minimalną szerokość */
+}
+
+.reply-form-container {
+  display: none; /* Ukrywa formularz domyślnie */
+}
+
+.btn-danger {
+  background-color: #19b927;
+  border-color: #19b927;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #19b927;
+  border-color: #19b927;
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}

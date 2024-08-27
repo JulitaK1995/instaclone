@@ -61,9 +61,22 @@ document.addEventListener("turbo:load", function() {
     });
   });
 
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".reply-toggle").forEach(function(button) {
+      button.addEventListener("click", function() {
+        var commentId = button.getAttribute("data-comment-id");
+        var formContainer = document.getElementById("reply-form-" + commentId);
+        if (formContainer) {
+          formContainer.style.display = formContainer.style.display === "none" || formContainer.style.display === "" ? "block" : "none";
+        }
+      });
+    });
+  });
 
-  document.addEventListener("turbo:frame-load", function(event) {
-    // Możesz dodać dodatkowe logi do debugowania, jeśli potrzebujesz
-    console.log("Turbo Frame loaded:", event.target);
+  $(document).ready(function() {
+    $(".reply-toggle").on("click", function() {
+      var commentId = $(this).data("comment-id");
+      $("#reply-form-" + commentId).toggle();
+    });
   });
 });

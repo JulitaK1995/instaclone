@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @comments = @post.comments
     @user = @post.user
+    @post.comments.includes(:replies, :user).order(created_at: :asc)
   end
 
   def myposts
