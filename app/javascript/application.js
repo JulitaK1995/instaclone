@@ -67,16 +67,17 @@ document.addEventListener("turbo:load", function() {
         var commentId = button.getAttribute("data-comment-id");
         var formContainer = document.getElementById("reply-form-" + commentId);
         if (formContainer) {
-          formContainer.style.display = formContainer.style.display === "none" || formContainer.style.display === "" ? "block" : "none";
+          // Toggle visibility of the form
+          if (formContainer.style.display === "none" || formContainer.style.display === "") {
+            formContainer.style.display = "block";
+            // Optionally focus on the text area
+            formContainer.querySelector(".reply-input").focus();
+          } else {
+            formContainer.style.display = "none";
+          }
         }
       });
     });
   });
-
-  $(document).ready(function() {
-    $(".reply-toggle").on("click", function() {
-      var commentId = $(this).data("comment-id");
-      $("#reply-form-" + commentId).toggle();
-    });
-  });
+  
 });

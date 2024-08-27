@@ -203,18 +203,20 @@ footer {
   display: none; /* Ukrywa formularz domyślnie */
 }
 
-.btn-danger {
-  background-color: #19b927;
-  border-color: #19b927;
-  color: #fff;
+/* Zielony przycisk */
+.btn-success {
+  background-color: #19b927; /* Zielony kolor tła */
+  border-color: #19b927; /* Zielony kolor obramowania */
+  color: #fff; /* Kolor tekstu */
 }
 
-.btn-danger:hover {
-  background-color: #19b927;
-  border-color: #19b927;
-  color: #fff;
+.btn-success:hover {
+  background-color: #17a834; /* Ciemniejszy zielony kolor tła po najechaniu */
+  border-color: #17a834; /* Ciemniejszy zielony kolor obramowania po najechaniu */
+  color: #fff; /* Kolor tekstu */
 }
 
+/* Styl dla przycisków w rozmiarze małym */
 .btn-sm {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
