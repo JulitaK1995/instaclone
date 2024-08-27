@@ -84,10 +84,13 @@
 
 </br>
 
-<h3>All comments</h3>
+<p> <h3>All comments</h3> </p>
 
 <% @post.comments.each do |comment| %>
-  <p><%= comment.text %></p>
+  <% if comment.user.present? %>
+    <p><strong><%= link_to comment.user.username, user_path(comment.user) %>:</strong> <%= comment.text %></p>
+  <% end %>
+
   <% if comment.user == current_user %>
     <% if comment.id.present? %>
       <%= button_to "Delete", post_comment_path(@post, comment), method: :delete %>
