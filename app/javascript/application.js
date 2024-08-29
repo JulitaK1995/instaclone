@@ -60,24 +60,4 @@ document.addEventListener("turbo:load", function() {
       openModal(modal, img.src, "");
     });
   });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".reply-toggle").forEach(function(button) {
-      button.addEventListener("click", function() {
-        var commentId = button.getAttribute("data-comment-id");
-        var formContainer = document.getElementById("reply-form-" + commentId);
-        if (formContainer) {
-          // Toggle visibility of the form
-          if (formContainer.style.display === "none" || formContainer.style.display === "") {
-            formContainer.style.display = "block";
-            // Optionally focus on the text area
-            formContainer.querySelector(".reply-input").focus();
-          } else {
-            formContainer.style.display = "none";
-          }
-        }
-      });
-    });
-  });
-  
 });

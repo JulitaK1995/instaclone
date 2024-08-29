@@ -78,13 +78,12 @@
 
 </br>
 
-<h2> Create comment </h2>
-
+<h2>Create comment</h2>
 <%= render 'comments/form', post: @post, comment: @comment %>
 
-</br>
+<br/>
 
-<p> <h3>All comments</h3> </p>
+<p><h3>All comments</h3></p>
 
 <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
   <div class="comment">
@@ -94,13 +93,21 @@
       <%= comment.text %>
     </p>
 
-    <!-- Przycisk "Add a reply" -->
-    <button type="button" class="btn btn-danger btn-sm reply-toggle" data-comment-id="<%= comment.id %>">
-      Add a reply
-    </button>
+    <!-- Kontener dla przycisków "Add a reply" i "Delete" -->
+    <div class="comment-actions" style="display: flex; gap: 10px;">
+      <!-- Przycisk "Add a reply" -->
+      <button type="button" class="btn btn-success btn-sm reply-toggle" data-comment-id="<%= comment.id %>">
+        Add a reply
+      </button>
+
+      <!-- Opcja usunięcia komentarza (wyświetlana tylko dla autora komentarza) -->
+      <% if comment.user == current_user %>
+        <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+      <% end %>
+    </div>
 
     <!-- Formularz odpowiedzi na główny komentarz (domyślnie ukryty) -->
-    <div class="reply-form-container" id="reply-form-<%= comment.id %>" style="display: none; margin-left: 15px; margin-top: 5px;">
+    <div class="reply-form-container" id="reply-form-<%= comment.id %>" style="display: none; margin-top: 5px;">
       <%= form_with(model: [comment.post, Comment.new], local: true, html: { class: "reply-form" }) do |f| %>
         <%= f.hidden_field :parent_comment_id, value: comment.id %>
         <%= f.text_area :text, placeholder: "Add a reply...", rows: 1, class: "reply-input" %>
@@ -117,8 +124,13 @@
             <%= reply.text %>
           </p>
 
-          <!-- Formularz odpowiedzi na odpowiedź (jeśli jest) -->
-          <div style="margin-left: 15px; margin-top: 5px;">
+          <!-- Przycisk "Add a reply" do odpowiedzi na odpowiedź -->
+          <button type="button" class="btn btn-success btn-sm reply-toggle" data-comment-id="<%= reply.id %>">
+            Add a reply
+          </button>
+
+          <!-- Formularz odpowiedzi na odpowiedź (domyślnie ukryty) -->
+          <div class="reply-form-container" id="reply-form-<%= reply.id %>" style="display: none; margin-left: 15px; margin-top: 5px;">
             <%= form_with(model: [comment.post, Comment.new], local: true, html: { class: "reply-form" }) do |f| %>
               <%= f.hidden_field :parent_comment_id, value: reply.id %>
               <%= f.text_area :text, placeholder: "Add a reply...", rows: 1, class: "reply-input" %>
@@ -128,17 +140,29 @@
         </div>
       <% end %>
     </div>
-
-    <!-- Opcja usunięcia komentarza -->
-    <% if comment.user == current_user %>
-      <% if comment.id.present? %>
-        <div style="margin-top: 5px;">
-          <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "btn btn-danger btn-sm" %>
-        </div>
-      <% end %>
-    <% end %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const replyToggles = document.querySelectorAll('.reply-toggle');
+
+    replyToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function() {
+        const commentId = this.getAttribute('data-comment-id');
+        const replyForm = document.getElementById(`reply-form-${commentId}`);
+
+        if (replyForm.style.display === "none") {
+          replyForm.style.display = "block";
+        } else {
+          replyForm.style.display = "none";
+        }
+      });
+    });
+  });
+</script>
+
+
 
 
 
