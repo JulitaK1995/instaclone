@@ -86,15 +86,20 @@
 <p><h3>All comments</h3></p>
 
 <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
-  <div class="comment">
+  <div class="comment" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
     <!-- Główny komentarz -->
     <p>
       <strong><%= link_to comment.user.username, user_path(comment.user) %></strong>
       <%= comment.text %>
+      <% if comment.parent_comment_id.nil? %>
+        <span style="font-weight: bold; color: #007bff;"</span>
+      <% else %>
+        <span style="font-weight: bold; color: #28a745;"></span>
+      <% end %>
     </p>
 
     <!-- Kontener dla przycisków "Add a reply" i "Delete" -->
-    <div class="comment-actions" style="display: flex; gap: 10px;">
+    <div class="comment-actions" style="display: flex; gap: 10px; margin-bottom: 5px;">
       <!-- Przycisk "Add a reply" -->
       <button type="button" class="btn btn-success btn-sm reply-toggle" data-comment-id="<%= comment.id %>">
         Add a reply
@@ -116,18 +121,24 @@
     </div>
 
     <!-- Wyświetlanie odpowiedzi na główny komentarz -->
-    <div class="replies" style="margin-left: 15px;">
+    <div class="replies" style="margin-left: 15px; margin-top: 10px;">
       <% comment.replies.each do |reply| %>
-        <div class="comment">
+        <div class="comment" style="border-left: 3px solid #007bff; padding-left: 10px; margin-bottom: 10px;">
           <p>
             <strong><%= link_to reply.user.username, user_path(reply.user) %></strong>
             <%= reply.text %>
           </p>
-
+          <div class="comment-actions" style="display: flex; gap: 10px; margin-bottom: 5px;">
           <!-- Przycisk "Add a reply" do odpowiedzi na odpowiedź -->
           <button type="button" class="btn btn-success btn-sm reply-toggle" data-comment-id="<%= reply.id %>">
             Add a reply
           </button>
+
+          <!-- Opcja usunięcia odpowiedzi (wyświetlana tylko dla autora odpowiedzi) -->
+          <% if reply.user == current_user %>
+            <%= button_to "Delete", post_comment_path(reply.post, reply), method: :delete, class: "btn btn-danger btn-sm" %>
+          <% end %>
+          </div>
 
           <!-- Formularz odpowiedzi na odpowiedź (domyślnie ukryty) -->
           <div class="reply-form-container" id="reply-form-<%= reply.id %>" style="display: none; margin-left: 15px; margin-top: 5px;">
@@ -135,6 +146,23 @@
               <%= f.hidden_field :parent_comment_id, value: reply.id %>
               <%= f.text_area :text, placeholder: "Add a reply...", rows: 1, class: "reply-input" %>
               <%= f.submit "Post", class: "btn btn-success btn-sm" %>
+            <% end %>
+          </div>
+
+          <!-- Wyświetlanie odpowiedzi na odpowiedź -->
+          <div class="replies" style="margin-left: 15px; margin-top: 10px;">
+            <% reply.replies.each do |sub_reply| %>
+              <div class="comment" style="border-left: 3px solid #28a745; padding-left: 10px; margin-bottom: 10px;">
+                <p>
+                  <strong><%= link_to sub_reply.user.username, user_path(sub_reply.user) %></strong>
+                  <%= sub_reply.text %>
+                </p>
+
+                <!-- Opcja usunięcia odpowiedzi (wyświetlana tylko dla autora odpowiedzi) -->
+                <% if sub_reply.user == current_user %>
+                  <%= button_to "Delete", post_comment_path(sub_reply.post, sub_reply), method: :delete, class: "btn btn-danger btn-sm" %>
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>
