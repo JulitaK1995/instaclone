@@ -9,11 +9,19 @@
 </div>
 
 <!-- Modal -->
-<div id="modal-<%= @user.id %>" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="modal-img-<%= @user.id %>">
-  <div id="caption-<%= @user.id %>"><%= @user.username %></div>
+<div id="avatarModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img id="modal-avatar-image" src="" alt="Avatar" class="img-fluid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 </br>
 

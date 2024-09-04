@@ -1,39 +1,26 @@
-import "@hotwired/turbo-rails"
+import "@hotwired/turbo-rails";
 
-// JavaScript kod
 document.addEventListener("turbo:load", function() {
   // Funkcja do otwierania modalu
-  function openModal(modal, imgSrc, captionText) {
-    var modalImg = modal.querySelector(".modal-content");
-    var caption = modal.querySelector(".caption");
+  function openModal(modal, imageUrl, caption) {
+    var modalImage = modal.querySelector("#modal-avatar-image");
+    var modalCaption = modal.querySelector("#modal-avatar-caption");
 
-    modal.style.display = "block";
-    modalImg.src = imgSrc;
-    if (caption) caption.innerHTML = captionText;
+    modalImage.src = imageUrl;
+    modalCaption.textContent = caption;
+
+    // Otwórz modal
+    $(modal).modal('show');
+  
 
     // Nasłuchiwanie na klawisz Escape
     const escapeListener = function(event) {
       if (event.key === "Escape") {
-        modal.style.display = "none";
+        $(modal).modal('hide');
         document.removeEventListener("keydown", escapeListener);
       }
     };
     document.addEventListener("keydown", escapeListener);
-
-    // Zamknięcie modalu po kliknięciu przycisku "close"
-    var span = modal.querySelector(".close");
-    span.addEventListener("click", function() {
-      modal.style.display = "none";
-      document.removeEventListener("keydown", escapeListener);
-    });
-
-    // Zamknięcie modalu po kliknięciu w dowolne miejsce poza obrazkiem
-    modal.addEventListener("click", function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-        document.removeEventListener("keydown", escapeListener);
-      }
-    });
   }
 
   // Obsługa kliknięcia na avatar
@@ -41,8 +28,7 @@ document.addEventListener("turbo:load", function() {
   avatars.forEach(function(img) {
     img.addEventListener("click", function() {
       var userId = img.dataset.userId;
-      var modalId = "modal-" + userId;
-      var modal = document.getElementById(modalId);
+      var modal = document.getElementById("avatarModal");
 
       fetch(`/users/${userId}/avatar_data`)
         .then(response => response.json())
@@ -52,7 +38,7 @@ document.addEventListener("turbo:load", function() {
     });
   });
 
-  // Obsługa kliknięcia na zdjęcia z postów
+  // Obsługa kliknięcia na zdjęcia z postów 
   var postImages = document.querySelectorAll(".post-image");
   postImages.forEach(function(img) {
     img.addEventListener("click", function() {

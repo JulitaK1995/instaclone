@@ -28,10 +28,11 @@ class UsersController < ApplicationController
 
   def avatar_data
     user = User.find(params[:id])
-    render json: {
-      image_url: url_for(user.avatar),
-      caption: user.username
-    }
+    if user.avatar.attached?
+      render json: { image_url: url_for(user.avatar), caption: user.name }
+    else
+      render json: { image_url: '', caption: 'No avatar available' }
+    end
   end
   
 end
