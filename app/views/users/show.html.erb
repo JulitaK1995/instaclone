@@ -4,24 +4,9 @@
 
 <div class="avatar-container">
   <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, class: "avatar-image", data: { user_id: @user.id } %>
+    <%= image_tag @user.avatar, class: "avatar-image", alt: "Avatar" %>
   <% end %>
 </div>
-
-<!-- Modal -->
-<div id="avatarModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <img id="modal-avatar-image" src="" alt="Avatar" class="img-fluid">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 </br>
 

@@ -14,6 +14,7 @@
     <%= javascript_importmap_tags 'application' %>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
   </head>
 
   <body>
@@ -21,19 +22,9 @@
     <%= yield %>
     <%= render "layouts/footer" %>
 
-    <!-- Modal -->
-    <div id="avatarModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <img id="modal-avatar-image" src="" alt="Avatar" class="img-fluid">
-            <p id="modal-avatar-caption"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
+    <div id="avatarModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-avatar-image" id="modal-avatar-image" alt="Avatar">
     </div>
   </body>
 </html>

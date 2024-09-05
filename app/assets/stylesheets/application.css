@@ -14,7 +14,7 @@
  *= require_self
  */
  
- html, body {
+html, body {
   height: 100%;
   margin: 0;
 }
@@ -28,18 +28,13 @@ footer {
   margin-top: auto;
 }
 
- .form-container {
+.form-container {
   background-color: #94e6e3; /* Opcjonalnie, aby formularz się wyróżniał */
   border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania dla lepszej widoczności */
   border-radius: 10px; /* Opcjonalnie, zaokrąglone rogi */
   margin-bottom: 20px; /* Odstęp poniżej każdego postu */
   padding: 20px;
   position: relative;
-  
-}
-
-.center-container h1 {
-  margin-bottom: 5px; /* Odstęp między nagłówkiem a formularzem */
 }
 
 .center-container {
@@ -47,24 +42,23 @@ footer {
   flex-direction: column;
   justify-content: center; /* Wyśrodkowuje w pionie */
   align-items: center;     /* Wyśrodkowuje w poziomie */
-  height: 12vh;           /* Ustawia wysokość kontenera na 100% wysokości widoku */
+  height: 12vh;           /* Ustawia wysokość kontenera */
   background-color: #f8fafa; /* Opcjonalne tło strony */
-  border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania dla lepszej widoczności */
-  margin-bottom: 20px; /* Odstęp poniżej każdego postu */
+  border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania */
+  margin-bottom: 20px;
   position: relative;
 }
 
 .post-container {
-  /* max-width: 500px; /* Maksymalna szerokość formularza */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Wyśrodkowuje w pionie */
-  align-items: center;     /* Wyśrodkowuje w poziomie */
-  background-color: #94e6e3; /* Opcjonalnie, aby formularz się wyróżniał */
-  border: 1px solid rgb(7, 7, 7); /* Opcjonalnie, dodanie obramowania dla lepszej widoczności */
-  border-radius: 10px; /* Opcjonalnie, zaokrąglone rogi */
+  justify-content: center;
+  align-items: center;
+  background-color: #94e6e3;
+  border: 1px solid rgb(7, 7, 7);
+  border-radius: 10px;
   padding: 20px;
-  margin-bottom: 20px; /* Odstęp poniżej każdego postu */
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -76,15 +70,14 @@ footer {
   left: 0;
   z-index: 4;
   opacity: 0;
-  background-color: #e0d8d8; /* Opcjonalnie, aby formularz się wyróżniał */
 }
 
-.center-text {
-  text-align: center; /* Wyśrodkowanie tekstu w kontenerze */
+.center-text,
+.centered-text {
+  text-align: center;
 }
 
 .centered-text {
-  text-align: center;
   margin-top: 40px;
 }
 
@@ -112,72 +105,42 @@ footer {
 .avatar-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
-  height: auto;
-  padding-top: 20px; 
+  align-items: flex-start;
+  padding-top: 20px;
 }
 
 .avatar-image {
-  width: 150px; 
-  height: 150px; 
-  border-radius: 50%; 
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   cursor: pointer;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 /* Modal - Ustawienia szerokości i wysokości */
+.modal {
+  display: none; /* Domyślnie ukryty */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Półprzezroczyste czarne tło */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .modal-dialog {
   max-width: 100%;
   margin: 0;
 }
 
 .modal-content {
-  height: 100vh; /* Wysokość na całej wysokości okna */
-  border: none;
-}
-
-.modal-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-#modal-avatar-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Zachowaj proporcje obrazu */
-}
-
-/* Styl dla modalu */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding-top: 50px;
-  left: 0;
-  top: 0;
-  width: 80%;
-  height: 80%;
-  overflow: hidden; /* Ukrywa wszelkie nadmiarowe elementy */
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Modal content */
-.modal-content {
-  max-width: 100vw; /* Wypełnia szerokość widoku */
-  max-height: 80vh; /* Wypełnia wysokość widoku */
-  object-fit: contain; /* Utrzymuje proporcje obrazka, skalując go */
-  cursor: grab;
-}
-
-/* Dodanie animacji */
-.modal-content {
-  animation-name: zoom;
-  animation-duration: 0.6s;
+  max-width: 90vw; /* Ograniczenie szerokości obrazka, aby zmieścił się na ekranie */
+  max-height: 90vh; /* Ograniczenie wysokości obrazka */
+  object-fit: contain; /* Zatrzymaj proporcje obrazka */
 }
 
 @keyframes zoom {
@@ -189,15 +152,29 @@ footer {
   }
 }
 
-/* Styl zamknięcia modalu */
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Modal content */
+.modal-avatar-image {
+  max-width: 90vw; /* Wypełnia szerokość widoku */
+  max-height: 90vh; /* Wypełnia wysokość widoku */
+  object-fit: contain; /* Utrzymuje proporcje obrazka */
+}
+
+/* Styl zamknięcia modala */
 .close {
   position: absolute;
   top: 15px;
   right: 35px;
-  color: #f1f1f1;
+  color: #fff;
   font-size: 40px;
   font-weight: bold;
-  transition: 0.3s;
+  cursor: pointer;
 }
 
 .close:hover,
@@ -220,25 +197,25 @@ footer {
 }
 
 .reply-input {
-  width: 300px; /* lub inna wartość, która Ci odpowiada */
-  min-width: 100px; /* opcjonalnie, aby ustawić minimalną szerokość */
+  width: 300px;
+  min-width: 100px;
 }
 
 .reply-form-container {
-  display: none; /* Ukrywa formularz domyślnie */
+  display: none;
 }
 
 /* Zielony przycisk */
 .btn-success {
-  background-color: #19b927; /* Zielony kolor tła */
-  border-color: #19b927; /* Zielony kolor obramowania */
-  color: #fff; /* Kolor tekstu */
+  background-color: #19b927;
+  border-color: #19b927;
+  color: #fff;
 }
 
 .btn-success:hover {
-  background-color: #17a834; /* Ciemniejszy zielony kolor tła po najechaniu */
-  border-color: #17a834; /* Ciemniejszy zielony kolor obramowania po najechaniu */
-  color: #fff; /* Kolor tekstu */
+  background-color: #17a834;
+  border-color: #17a834;
+  color: #fff;
 }
 
 /* Styl dla przycisków w rozmiarze małym */
